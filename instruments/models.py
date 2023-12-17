@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 
 class Instruments(models.Model):
@@ -21,3 +22,9 @@ class Order(models.Model):
 
     def __str__(self):
         return f'Order for {self.instruments.name} by {self.costumer_name}'
+
+
+class CustomUser(AbstractUser):
+    full_name = models.CharField(max_length=255, blank=True)
+    age = models.PositiveIntegerField(null=True, blank=True)
+    email = models.EmailField(unique=True)
